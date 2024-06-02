@@ -8,6 +8,15 @@ green = Fore.GREEN
 yellow = Fore.YELLOW
 blue = Fore.BLUE
 
+def get_banner():
+    banner = """
+         ___                     _        ___             __           
+        / _ \ ___   __ _  ___ _ (_)___   / _ ) __ __ ___ / /_ ___  ____
+       / // // _ \ /  ' \/ _ `// // _ \ / _  |/ // /(_-</ __// -_)/ __/
+      /____/ \___//_/_/_/\_,_//_//_//_//____/ \_,_//___/\__/ \__//_/                                                                              
+    """
+    print(blue + banner)
+
 def get_arguments():
     parse = argparse.ArgumentParser()
     parse.add_argument("-u","--url",dest="url",help="sepcify the target url to find subdomains")
@@ -57,7 +66,7 @@ def directory_bruteforce(url,wordlists):
                 print(green + f"[+] Hidden directories are now visible to the eyes  ----> {full_url} (200)")
             elif resp and resp.status_code == 301:
                 print(blue + f"[+] redirect  ---->  {full_url} (301)")
-
+get_banner()
 def main():
     args = get_arguments()
     url = args.url
