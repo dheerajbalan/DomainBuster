@@ -1,6 +1,12 @@
 import requests
 import argparse
 import urllib3  # Add this line
+from colorama import Fore
+
+red = Fore.RED
+green = Fore.GREEN
+yellow = Fore.YELLOW
+blue = Fore.BLUE
 
 def get_arguments():
     parse = argparse.ArgumentParser()
@@ -30,9 +36,9 @@ def subdomain_bruteforce(url,wordlists):
             try:
                 resp = get_request(full_url)
                 if resp and resp.status_code == 200:
-                    print(f"[+] Subdomain exists ----> {full_url} (200)")
+                    print(green + f"[+] Subdomain exists ----> {full_url} (200)")
                 elif resp and resp.status_code == 301:
-                    print(f"[+] subdomains redirects ----> {full_url} (301)")
+                    print(blue + f"[+] subdomains redirects ----> {full_url} (301)")
             except urllib3.exceptions.LocationParseError :
                 continue
 
@@ -48,9 +54,9 @@ def directory_bruteforce(url,wordlists):
             resp = get_request(full_url)
 
             if resp and resp.status_code == 200:
-                print(f"[+] Hidden directories are now visible to the eyes  ----> {full_url} (200)")
+                print(green + f"[+] Hidden directories are now visible to the eyes  ----> {full_url} (200)")
             elif resp and resp.status_code == 301:
-                print(f"[+] redirect  ---->  {full_url} (301)")
+                print(blue + f"[+] redirect  ---->  {full_url} (301)")
 
 def main():
     args = get_arguments()
@@ -60,23 +66,23 @@ def main():
     
     try:
         if not url:
-            print("[!] please specify the url using -u or --url")
+            print(yellow + "[!] please specify the url using -u or --url")
             return
 
         if subdomain and not directory:
-            print("[*] subdomains bruteforcing....")
+            print(yellow + "[*] subdomains bruteforcing....")
             subdomain_bruteforce(url,subdomain)
         
         elif directory:
-            print("[*] directory bruteforcing....\n")
+            print(yellow + "[*] directory bruteforcing....\n")
             directory_bruteforce(url,directory)
             return
         else:
-            print("[!] please specify the wordlist use  -s or -d option eg: -s or -d /path/to/worldist.txt")
+            print(yellow + "[!] please specify the wordlist use  -s or -d option eg: -s or -d /path/to/worldist.txt")
 
        
         
     except KeyboardInterrupt:
-        print("Ctrl + C , Exiting....")
+        print(red + "Ctrl + C , Exiting....")
 if __name__ =="__main__":
     main()
