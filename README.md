@@ -42,7 +42,7 @@ Replace `<target_url>` with the URL of the target domain, `<subdomain_wordlist>`
     ```
 
  Credits
-DomainBuster was created by [Your Name].
+DomainBuster was created by Dheeraj T B.
 
  License
 This project is licensed under the [MIT License](LICENSE).
